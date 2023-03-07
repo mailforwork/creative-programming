@@ -17,38 +17,45 @@ const App: React.FC = () => {
     return rows;
   })
 
+  const [running, setRunning] = useState(false);
 
   return (
-    <div style={
-      {
-        display: 'grid',
-        gridTemplateColumns: `repeat(${numCols}, 20px)`
-      }
-    }>
-      {/* <h1>Life Game</h1> */}
-      {
-        grid.map((rows, i) =>
-          rows.map((col, k) =>
-            <div key={`${i}-${k}`}
+    <>
+      <button onClick={() => { setRunning(!running); }}>
+        {running ? "Stop" : "Start"}
+      </button>
 
-              onClick={() => {
-                const newGrid = produce(grid, gridCopy => { gridCopy[i][k] = grid[i][k] ? 0 : 1; })
-                setGrid(newGrid);
+      <div style={
+        {
+          display: 'grid',
+          gridTemplateColumns: `repeat(${numCols}, 20px)`
+        }
+      }>
+        {/* <h1>Life Game</h1> */}
+        {
+          grid.map((rows, i) =>
+            rows.map((col, k) =>
+              <div key={`${i}-${k}`}
 
-              }}
+                onClick={() => {
+                  const newGrid = produce(grid, gridCopy => { gridCopy[i][k] = grid[i][k] ? 0 : 1; })
+                  setGrid(newGrid);
 
-              style={{
-                width: 20,
-                height: 20,
-                backgroundColor: grid[i][k] ? 'pink' : undefined,
-                border: 'solid 1px black'
-              }} />
+                }}
+
+                style={{
+                  width: 20,
+                  height: 20,
+                  backgroundColor: grid[i][k] ? 'pink' : undefined,
+                  border: 'solid 1px black'
+                }} />
+            )
           )
-        )
 
-      }
+        }
 
-    </div>
+      </div>
+    </>
   )
 }
 
