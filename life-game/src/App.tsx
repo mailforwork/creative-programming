@@ -105,7 +105,7 @@ const App: React.FC = () => {
               style={{
                 width: 20,
                 height: 20,
-                backgroundColor: grid[i][k] ? "lime" : undefined,
+                backgroundColor: grid[i][k] ? "#006400" : undefined,
                 border: "solid 1px black",
               }}
             />
