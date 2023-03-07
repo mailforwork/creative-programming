@@ -1,4 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import produce from 'immer';
+
 // import logo from './logo.svg';
 import './App.css';
 
@@ -25,17 +27,25 @@ const App: React.FC = () => {
     }>
       {/* <h1>Life Game</h1> */}
       {
-       grid.map((rows, i:number) =>
-       rows.map((col, k:number) =>
-         <div key={`${i}-${k}`} style={{
-           width: 20,
-           height: 20,
-           backgroundColor: grid[i][k] ? 'pink' : undefined,
-           border: 'solid 1px black'
-         }} />
-       )
-     )
-     
+        grid.map((rows, i) =>
+          rows.map((col, k) =>
+            <div key={`${i}-${k}`}
+
+              onClick={() => {
+                const newGrid = produce(grid, gridCopy => { gridCopy[i][k] = grid[i][k] ? 0 : 1; })
+                setGrid(newGrid);
+
+              }}
+
+              style={{
+                width: 20,
+                height: 20,
+                backgroundColor: grid[i][k] ? 'pink' : undefined,
+                border: 'solid 1px black'
+              }} />
+          )
+        )
+
       }
 
     </div>
